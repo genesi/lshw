@@ -1,3 +1,9 @@
+lshw (02.16-2genesi0) maverick; urgency=low
+
+  * Upstream lshw package built for the Efika MX53
+
+ -- Chris Jenkins <chris.jenkins@genesi-usa.com>  Mon, 02 Jun 2014 21:17:35 -0500
+
 lshw (02.16-2) unstable; urgency=low
 
   * Closes: #525217
