@@ -6,7 +6,7 @@ SQLITE?=0
 
 DESTDIR?=/
 PREFIX?=/usr
-SBINDIR=$(PREFIX)/sbin
+SBINDIR=$(PREFIX)/bin
 MANDIR=$(PREFIX)/share/man
 DATADIR=$(PREFIX)/share
 INSTALL?=install -p
@@ -21,11 +21,13 @@ export SQLITE
 CXX?=c++
 INCLUDES=-I./core/
 DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
-CXXFLAGS=-g -Wall -g $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
+#CXXFLAGS=-g -Wall -g $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
+CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES) 
 ifeq ($(SQLITE), 1)
 	CXXFLAGS+= -DSQLITE $(shell pkg-config --cflags sqlite3)
 endif
-LDFLAGS=-L./core/ -g
+#LDFLAGS=-L./core/ -g
+LDFLAGS=-L./core/
 ifneq ($(shell $(LD) --help 2| grep -- --as-needed), )
 	LDFLAGS+= -Wl,--as-needed
 endif
@@ -82,16 +84,16 @@ $(PACKAGENAME).1: $(PACKAGENAME).sgml
 	docbook2man $<
 
 pci.ids:
-	wget http://pciids.sourceforge.net/pci.ids
+	#wget http://pciids.sourceforge.net/pci.ids
 
 usb.ids:
-	wget http://www.linux-usb.org/usb.ids
+	#wget http://www.linux-usb.org/usb.ids
 
 oui.txt:
-	wget http://standards.ieee.org/regauth/oui/oui.txt
+	#wget http://standards.ieee.org/regauth/oui/oui.txt
 
 manuf.txt:
-	wget -O $@ http://anonsvn.wireshark.org/wireshark/trunk/manuf
+	#wget -O $@ http://anonsvn.wireshark.org/wireshark/trunk/manuf
 
 install: all
 	$(INSTALL) -d -m 0755 $(DESTDIR)/$(SBINDIR)
@@ -104,8 +106,8 @@ install: all
 
 install-gui: gui
 	$(INSTALL) -d -m 0755 $(DESTDIR)/$(SBINDIR)
-	$(INSTALL) -m 0755 gui/gtk-$(PACKAGENAME) $(DESTDIR)/$(SBINDIR)
-	$(INSTALL) -d -m 0755 $(DESTDIR)/$(DATADIR)/$(PACKAGENAME)/artwork
+	$(INSTALL) -m 0755 gui/gtk-$(PACKAGENAME) $(DESTDIR)/$(SBINDIR)/$(PACKAGENAME)-gtk
+	$(INSTALL) -d -m 0754 $(DESTDIR)/$(DATADIR)/$(PACKAGENAME)/artwork
 	$(INSTALL) -d -m 0755 $(DESTDIR)/$(DATADIR)/$(PACKAGENAME)/ui
 	$(INSTALL) -m 0644 gui/*.ui $(DESTDIR)/$(DATADIR)/$(PACKAGENAME)/ui
 	$(INSTALL) -m 0644 gui/artwork/*.svg $(DESTDIR)/$(DATADIR)/$(PACKAGENAME)/artwork

@@ -112,6 +112,8 @@ const char * checkupdates()
 {
   static char *latest = NULL;
 
+  return NULL;
+
   if(!latest)
     latest = txtquery(PACKAGE, "ezix.org", NULL);
 

@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <cstring>
 
 __ID("@(#) $Id: cpuid.cc 2433 2012-01-10 22:01:30Z lyonel $");
 

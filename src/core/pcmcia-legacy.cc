@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <cstring>
 
 __ID("@(#) $Id: pcmcia-legacy.cc 2433 2012-01-10 22:01:30Z lyonel $");
 

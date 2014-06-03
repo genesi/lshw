@@ -1751,8 +1751,8 @@ bool scan_dmi(hwNode & n)
   u16 dmimaj = 0, dmimin = 0;
   currentcpu = 0;
 
-#ifdef __hppa__
-  return false;		// SMBIOS not supported on PA-RISC machines
+#if defined(__arm__) || defined (__hppa__)
+  return false;		// SMBIOS not supported on ARM and PA-RISC machines
 #endif
 
   if (sizeof(u8) != 1 || sizeof(u16) != 2 || sizeof(u32) != 4)

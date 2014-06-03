@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <iostream>
+#include <errno.h>
 
 #ifndef NONLS
 #include <locale.h>
@@ -30,8 +31,8 @@ void usage(const char *progname)
   fprintf(stderr, _("\t-xml            output hardware tree as XML\n"));
   fprintf(stderr, _("\t-short          output hardware paths\n"));
   fprintf(stderr, _("\t-businfo        output bus information\n"));
-  if(getenv("DISPLAY") && exists(SBINDIR"/gtk-lshw"))
-    fprintf(stderr, _("\t-X              use graphical interface\n"));
+  if(getenv("DISPLAY") && exists(SBINDIR"/lshw-gtk"))
+      fprintf(stderr, _("\t-X              use graphical interface\n"));
   fprintf(stderr, _("\noptions can be\n"));
 #ifdef SQLITE
   fprintf(stderr, _("\t-dump OUTFILE   save hardware tree to a file\n"));
@@ -211,7 +212,19 @@ char **argv)
     exit(1);
   }
 
-  if(enabled("output:X")) execl(SBINDIR"/gtk-lshw", SBINDIR"/gtk-lshw", NULL);
+/*  if(enabled("output:X")) execl(SBINDIR"/gtk-lshw", SBINDIR"/gtk-lshw", NULL); */
+
+  if(enabled("output:X")) {
+        execl(SBINDIR"/lshw-gtk", SBINDIR"/lshw-gtk", NULL);                                                                                                                                                    
+        // Execl only returns if an error has occurred.
+        if ( errno == ENOENT ) {
+             fprintf(stderr, "ERROR: Sorry, cannot run the X11/GTK interface because %s/lshw-gtk\n is not available.\n", SBINDIR);                                                                               
+             fprintf(stderr, "HINT: Install the lshw-gtk package in Debian.\n");                                                                                                                                 
+        } else {
+             fprintf(stderr, "ERROR: There was an error when trying to execute %s/lshw-gtk: %s\n", SBINDIR, strerror(errno));                                                                                    
+             fprintf(stderr, "Will just print the information on screen\n");                                                                                                                                     
+        }
+  }
 
   if (geteuid() != 0)
   {

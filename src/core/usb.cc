@@ -14,6 +14,7 @@
 #include "heuristics.h"
 #include "options.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <map>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -24,10 +25,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <cstring>
 
 #define PROCBUSUSBDEVICES "/proc/bus/usb/devices"
 #define SYSBUSUSBDEVICES "/sys/bus/usb/devices"
 #define USBID_PATH DATADIR"/usb.ids:/usr/share/lshw/usb.ids:/usr/local/share/usb.ids:/usr/share/usb.ids:/etc/usb.ids:/usr/share/hwdata/usb.ids:/usr/share/misc/usb.ids"
+#define USBID_PATH DATADIR"/usb.ids:/usr/share/lshw-common/usb.ids:/usr/local/share/usb.ids:/usr/share/usb.ids:/etc/usb.ids:/usr/share/hwdata/usb.ids:/usr/share/misc/usb.ids"
 
 #define USB_CLASS_PER_INTERFACE         0         /* for DeviceClass */
 #define USB_CLASS_AUDIO                 1

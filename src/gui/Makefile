@@ -8,7 +8,8 @@ OBJCOPY?=objcopy
 DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
 GTKINCLUDES=$(shell pkg-config gtk+-2.0 --cflags)
 INCLUDES=-I../core $(GTKINCLUDES)
-CXXFLAGS=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
+#CXXFLAGS=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
+CXXFLAGS=$(CXX_DEB_FLAGS) $(INCLUDES) $(DEFINES)
 CFLAGS=$(CXXFLAGS) $(DEFINES)
 GTKLIBS=$(shell pkg-config gtk+-2.0 gmodule-2.0 --libs)
 LIBS=-L../core -llshw -lresolv -lsqlite3 $(GTKLIBS)

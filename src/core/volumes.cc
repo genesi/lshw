@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <time.h>
+#include <cstring>
 
 __ID("@(#) $Id: volumes.cc 2433 2012-01-10 22:01:30Z lyonel $");
 

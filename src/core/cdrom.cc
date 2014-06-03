@@ -25,6 +25,7 @@
 #include <unistd.h>
 #include <limits.h>
 #include <linux/cdrom.h>
+#include <climits>
 
 __ID("@(#) $Id: cdrom.cc 2433 2012-01-10 22:01:30Z lyonel $");
 

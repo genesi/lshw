@@ -9,6 +9,7 @@
 #include <string>
 #include <dirent.h>
 #include <stdio.h>
+#include <cstring>
 
 __ID("@(#) $Id: spd.cc 2433 2012-01-10 22:01:30Z lyonel $");
 

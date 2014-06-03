@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <cstdlib>
 
 __ID("@(#) $Id: mounts.cc 2433 2012-01-10 22:01:30Z lyonel $");
 
