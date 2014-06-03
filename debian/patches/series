@@ -1,0 +1,14 @@
+wget.patch
+bin.patch
+lshw-gtk.patch
+lshw-common.patch
+cflags.patch
+#alpha.patch
+gcc45.gcc
+lshw-X.patch
+privacy.patch
+sparc.patch
+spelling-error.patch
+fix-manpage.patch
+arm-disable-smbios-check.patch
+lshw-devictree-assume-untyped-cpu-is-cpu.patch

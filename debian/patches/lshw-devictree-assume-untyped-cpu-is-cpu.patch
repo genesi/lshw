@@ -1,0 +1,12 @@
+--- a/src/core/device-tree.cc.orig	2013-05-07 14:57:16.400177000 -0400
++++ b/src/core/device-tree.cc	2013-05-07 15:01:51.710177000 -0400
+@@ -193,7 +193,8 @@
+       struct dirent **cachelist;
+       int ncache;
+ 
+-      if (hw::strip(get_string(basepath + "/device_type")) != "cpu")
++      if (exists(basepath + "/device_type") &&
++        hw::strip(get_string(basepath + "/device_type")) != "cpu")
+         break;                                    // oops, not a CPU!
+ 
+       cpu.setProduct(get_string(basepath + "/name"));
